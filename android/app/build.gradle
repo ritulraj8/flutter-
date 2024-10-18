@@ -1,0 +1,56 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace = "com.example.learning"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId "com.example.learning"
+        minSdkVersion 23 // Replace with actual value
+        targetSdkVersion 34 // Replace with actual value
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true // If you're using multidex
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true // Enable resource shrinking
+            minifyEnabled true // Enable code shrinking (this requires ProGuard configuration)
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.4.0')
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Add additional Firebase products as needed
+    // e.g., implementation 'com.google.firebase:firebase-auth'
+}
+
+flutter {
+    source = "../.."
+}
+
+apply plugin: 'com.google.gms.google-services' // This should stay at the bottom
+
+
+
